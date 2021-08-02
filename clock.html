@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="clock.js"></script>
+</head>
+
+<body>
+
+    <div style="text-align: center;">
+        <a href="./clock.html">Clock</a>
+        <a href="./Stopwatch.html">Stopwatch</a>
+    </div>
+    <div id="printword"></div>
+    <input type="text" id="inp">
+    <input type="button" onclick="handleChange()" value="Submit">
+    <script>
+        let event = new Date();
+        document.getElementById("printword").innerHTML = event;
+        let history = "";
+
+        function handleChange() {
+            let CollectTimezone = [];
+            alert("Helloworld");
+            let InpValue = document.getElementById("inp").value;
+            CollectTimezone.push(InpValue);
+            alert(InpValue);
+
+            for (let i = 0; i < CollectTimezone.length; i++) {
+                console.log(CollectTimezone[i]);
+                let curr = event.toLocaleString('en-GB', {
+                    timeZone: CollectTimezone[i]
+                });
+                history += curr + "</br>";
+            }
+            document.getElementById("printword").innerHTML = history;
+        }
+    </script>
+</body>
+
+</html>
