@@ -193,6 +193,7 @@
                 suggestions.forEach(function(suggested) {
                     const div = document.createElement('div');
                     div.innerHTML = suggested.name;
+                    div.addEventListener("click", () => searchInput.value = div.innerText);
                     suggestionsPanel.appendChild(div);
                 });
                 if (input === '') {
