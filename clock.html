@@ -16,9 +16,190 @@
         <a href="./Stopwatch.html">Stopwatch</a>
     </div>
     <div id="printword"></div>
-    <input type="text" id="inp">
-    <input type="button" onclick="handleChange()" value="Submit">
+    <div class="container">
+        <input class="search-input" type="text" id="inp" placeholder="Search here..." />
+        <input type="button" onclick="handleChange()" value="Submit">
+        <div class="suggestions">
+        </div>
+    </div>
     <script>
+        /*start*/
+        const countries = [{
+            name: "Etc/GMT-12"
+        }, {
+            name: "Etc/GMT-11"
+        }, {
+            name: "Pacific/Midway"
+        }, {
+            "offset": "GMT-10:00",
+            name: "America/Adak"
+        }, {
+            "offset": "GMT-09:00",
+            name: "America/Anchorage"
+        }, {
+            "offset": "GMT-09:00",
+            name: "Pacific/Gambier"
+        }, {
+            "offset": "GMT-08:00",
+            name: "America/Dawson_Creek"
+        }, {
+            "offset": "GMT-08:00",
+            name: "America/Ensenada"
+        }, {
+            "offset": "GMT-08:00",
+            name: "America/Los_Angeles"
+        }, {
+            "offset": "GMT-07:00",
+            name: "America/Chihuahua"
+        }, {
+            "offset": "GMT-07:00",
+            name: "America/Denver"
+        }, {
+            "offset": "GMT-06:00",
+            name: "America/Belize"
+        }, {
+            "offset": "GMT-06:00",
+            name: "America/Cancun"
+        }, {
+            "offset": "GMT+02:00",
+            name: "Asia/Jerusalem"
+        }, {
+            "offset": "GMT+03:00",
+            name: "Africa/Addis_Ababa"
+        }, {
+            "offset": "GMT+03:00",
+            name: "Asia/Riyadh89"
+        }, {
+            "offset": "GMT+03:00",
+            name: "Europe/Minsk"
+        }, {
+            "offset": "GMT+03:30",
+            name: "Asia/Tehran"
+        }, {
+            "offset": "GMT+04:00",
+            name: "Asia/Dubai"
+        }, {
+            "offset": "GMT+04:00",
+            name: "Asia/Yerevan"
+        }, {
+            "offset": "GMT+04:00",
+            name: "Europe/Moscow"
+        }, {
+            "offset": "GMT+04:30",
+            name: "Asia/Kabul"
+        }, {
+            "offset": "GMT+05:00",
+            name: "Asia/Tashkent"
+        }, {
+            "offset": "GMT+05:30",
+            name: "Asia/Kolkata"
+        }, {
+            "offset": "GMT+05:45",
+            name: "Asia/Katmandu"
+        }, {
+            "offset": "GMT+06:00",
+            name: "Asia/Dhaka"
+        }, {
+            "offset": "GMT+06:00",
+            name: "Asia/Yekaterinburg"
+        }, {
+            "offset": "GMT+06:30",
+            name: "Asia/Rangoon"
+        }, {
+            "offset": "GMT+07:00",
+            name: "Asia/Bangkok"
+        }, {
+            "offset": "GMT+07:00",
+            name: "Asia/Novosibirsk"
+        }, {
+            "offset": "GMT+08:00",
+            name: "Etc/GMT+8"
+        }, {
+            "offset": "GMT+08:00",
+            name: "Asia/Hong_Kong"
+        }, {
+            "ofset": "GMT+08:00",
+            name: "Asia/Krasnoyarsk"
+        }, {
+            "offset": "GMT+08:00",
+            name: "Australia/Perth"
+        }, {
+            "offset": "GMT+08:45",
+            name: "Australia/Eucla"
+        }, {
+            "offset": "GMT+09:00",
+            name: "Asia/Irkutsk"
+        }, {
+            "offset": "GMT+09:00",
+            name: "Asia/Seoul"
+        }, {
+            "offset": "GMT+09:00",
+            name: "Asia/Tokyo"
+        }, {
+            "offset": "GMT+09:30",
+            name: "Australia/Adelaide"
+        }, {
+            "offset": "GMT+09:30",
+            name: "Australia/Darwin"
+        }, {
+            "offset": "GMT+09:30",
+            name: "Pacific/Marquesas"
+        }, {
+            "offset": "GMT+10:00",
+            name: "Etc/GMT+10"
+        }, {
+            "offset": "GMT+10:00",
+            name: "Australia/Brisbane"
+        }, {
+            "offset": "GMT+10:00",
+            name: "Australia/Hobart"
+        }, {
+            "offset": "GMT+10:00",
+            name: "Asia/Yakutsk"
+        }, {
+            "offset": "GMT+10:30",
+            name: "Australia/Lord_Howe"
+        }, {
+            "offset": "GMT+11:00",
+            name: "Asia/Vladivostok"
+        }, {
+            "offset": "GMT+11:30",
+            name: "Pacific/Norfolk"
+        }, {
+            name: "Etc/GMT+12"
+        }, {
+            name: "Asia/Anadyr"
+        }, {
+            name: "Asia/Magadan"
+        }, {
+            name: "Pacific/Auckland"
+        }, {
+            name: "Pacific/Chatham"
+        }, {
+            name: "Pacific/Tongatapu"
+        }, {
+            name: "Pacific/Kiritimati"
+        }];
+
+        const searchInput = document.querySelector('.search-input');
+        const suggestionsPanel = document.querySelector('.suggestions');
+
+        searchInput.addEventListener('keyup', function() {
+                const input = searchInput.value;
+                suggestionsPanel.innerHTML = '';
+                const suggestions = countries.filter(function(country) {
+                    return country.name.toLowerCase().startsWith(input);
+                });
+                suggestions.forEach(function(suggested) {
+                    const div = document.createElement('div');
+                    div.innerHTML = suggested.name;
+                    suggestionsPanel.appendChild(div);
+                });
+                if (input === '') {
+                    suggestionsPanel.innerHTML = '';
+                }
+            })
+            /* end*/
         let event = new Date();
         document.getElementById("printword").innerHTML = event;
         let history = "";
@@ -35,7 +216,7 @@
                 let curr = event.toLocaleString('en-GB', {
                     timeZone: CollectTimezone[i]
                 });
-                history += curr + "</br>";
+                history += curr + " " + CollectTimezone[i] + "</br>";
             }
             document.getElementById("printword").innerHTML = history;
         }
